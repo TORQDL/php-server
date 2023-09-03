@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "build": "docker build --no-cache --build-arg UID=$(stat -c %u .) --build-arg GID=$(stat -c %g .) -t php-server",
+    "start": "docker run -it --rm -v $(pwd):/var/www/html -p 80:80 php-server",
+    "stop": "docker stop php-server",
+    "clean": "docker rm php-server",
+    "build:compose": "docker compose -f docker-compose.yml build --no-cache --build-arg UID=$(stat -c %u .) --build-arg GID=$(stat -c %g .) -t php-server",
+    "start:compose": "docker-compose -f docker-compose.yml up -d",
+    "stop:compose": "docker-compose -f docker-compose.yml down"
+  }
+}

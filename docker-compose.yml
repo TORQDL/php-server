@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  phpserver:
+    container_name: phpserver
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        # If a UID or GID isn't found, value for each is set to 1000 (that's what the :- separator means, a default value).
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - '80:80'  # will use Nginx Proxy Manager to connect to this via HTTPS after NPM configuration
